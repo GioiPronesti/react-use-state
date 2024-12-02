@@ -1,33 +1,34 @@
+import languages from "./languages.js"
+import TabButton from './components/TabButton'
+import Tab from './components/Tab'
+import tabStyle from './components/Tabs.module.css'
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
-
+  
+  const [currentLangIndex, setCurrentLangIndex] = useState(currentLangIndex)
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <main>
+        <section className="laguages">
+          <div className="container">
+            <h1>Learn Development</h1>
+          </div>
+          <div className="container">
+            <div className={tabStyle.tabs}>
+              <div className={tabStyle.tabs_selectors}>
+                {
+                  languages.map((lang,i) => (
+                    <TabButton className={i === currentLangIndex ? tabStyle.active : ''} key={lang.id} item={lang} callback={() => setCurrentLangIndex(currentLangIndex)}></TabButton>
+                  ))
+                }
+              </div> 
+              <Tab item={languages[currentLangIndex]} />
+            </div>
+          </div>
+        </section>
+      </main>
+        
     </>
   )
 }
